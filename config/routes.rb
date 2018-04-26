@@ -12,12 +12,27 @@ Rails.application.routes.draw do
       get :followers
     end
     
+=begin
     collection do
       get :search
     end
-    
+=end
+
   end
 
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  
+  ############################################################
+  #お気に入り用
+  resources :users, only: [:create, :destroy] do
+    member do
+      get :likings
+      get :likes
+    end
+  end
+  
+  resources :favorites, only: [:create, :destroy]
+  ############################################################
+  
 end

@@ -11,11 +11,29 @@
         <div>
           <p><%= micropost.content %></p>
         </div>
+        
+        <!--削除ボタン-->
         <div>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
         </div>
+      
+        <!--お気に入りボタン-->
+        <div>
+          <!--<% if current_user == micropost.user %>-->
+          
+            <% unless current_user.liking?(micropost) %>
+              <%= link_to "Favorite", favorites_path(micropost_id: micropost.id), method: :post, class: 'btn btn-danger btn-xs' %>
+          
+            <% else %>
+              <% favorite = current_user.favorites.find_by(micropost_id: micropost.id) %>
+              <%= link_to "UnFavorite", favorite_path(favorite,micropost_id: micropost.id), method: :delete, class: 'btn btn-danger btn-xs' %>
+            <% end %>
+            
+          <!--<% end %>-->
+        </div>
+        
       </div>
     </li>
   <% end %>
