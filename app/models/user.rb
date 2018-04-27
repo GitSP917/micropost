@@ -36,7 +36,7 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
-  #############################################################
+  #############################################################お気に入り
   
   def like(other_micropost)
     unless self == other_micropost
@@ -49,12 +49,10 @@ class User < ApplicationRecord
     favorite.destroy if favorite
   end
 
-#begin
   def liking?(other_micropost)
     self.likings.include?(other_micropost)
   end
-#end
 
-  ##################################################
+  #############################################################お気に入り
 
 end

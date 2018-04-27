@@ -3,7 +3,7 @@
   <div class="row">
     <aside class="col-md-4">
 
-      <!--投稿用フォーム-->
+      <%# 投稿用フォーム %>
       <%= form_for(@micropost) do |f| %>
         <div class="form-group">
           <%= f.text_area :content, class: 'form-control', rows: 5 %>
@@ -15,11 +15,11 @@
     
     
     <div class="col-xs-8">
-      <!-- タイムライン -->
+      <%# タイムライン %>
       <%= render 'microposts/microposts', microposts: @microposts %>
       
-      <!-- お気に入りボタン (没) -->
-      <!-- <%= render 'favorites/like_button', user: @user %> -->
+      <%# お気に入りボタン (没) %>
+      <%#= render 'favorites/like_button', user: @user %>
     </div>
     
   </div>

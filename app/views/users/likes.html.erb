@@ -18,6 +18,7 @@
       <%#お気に入り表示用%>
       <li class="<%= 'active' if current_page?(likes_user_path(@user)) %>"><%= link_to likes_user_path(@user) do %>Favorites <span class="badge"><%#= @count_microposts %></span><% end %></li>
     </ul>
-    <%= render 'users', users: @followers %>
+    <%= render 'favorites/show_likes', liking: @liking %>
+    
   </div>
 </div>
