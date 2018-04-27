@@ -1,0 +1,39 @@
+<% micropost_show.each do |micropost| %>
+  <li class="media">
+    <div class="media-left">
+      <img class="media-object img-rounded" src="<%= gravatar_url(micropost.user, options = { size: 50 }) %>" alt="">
+    </div>
+    <div class="media-body">
+      <div>
+        <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+      </div>
+      <div>
+        <p><%= micropost.content %></p>
+      </div>
+      
+      <%# 削除ボタン %>
+      <div>
+        <% if current_user == micropost.user %>
+          <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+        <% end %>
+      </div>
+    
+      <%# お気に入りボタン %>
+      <div>
+        
+        <%# if current_user == micropost.user (自分自身もお気に入り可能)%>
+        
+          <% unless current_user.liking?(micropost) %>
+            <%= link_to "Favorite", favorites_path(micropost_id: micropost.id), method: :post, class: 'btn btn-success btn-xs' %>
+        
+          <% else %>
+            <% favorite = current_user.favorites.find_by(micropost_id: micropost.id) %>
+            <%= link_to "UnFavorite", favorite_path(favorite,micropost_id: micropost.id), method: :delete, class: 'btn btn-warning btn-xs' %>
+          <% end %>
+          
+        <%# end %>
+      </div>
+      
+    </div>
+  </li>
+<% end %>
